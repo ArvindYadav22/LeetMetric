@@ -1,0 +1,222 @@
+:root {
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #e0e0e0;
+    --accent-color: #4caf50; /* Green for LeetCode vibes */
+    --accent-hover: #45a049;
+    --error-color: #ff5252;
+    --easy-color: #00b8a3;
+    --medium-color: #ffc01e;
+    --hard-color: #ff375f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#user-input:focus {
+    border-color: var(--accent-color);
+}
+
+#search-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#search-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+#search-btn:active {
+    transform: scale(0.98);
+}
+
+#search-btn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.progress {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #333; /* Fallback */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* We will use a pseudo-element or gradient for the ring */
+    background: conic-gradient(var(--color) var(--progress-degree, 0%), #444 0%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: --progress-degree 1s ease-out; /* Note: animating custom props requires @property support or JS animation */
+}
+
+/* Inner circle to create the ring effect */
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+}
+
+.circle span {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.circle span strong {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* Specific colors for circles */
+.easy-progress { --color: var(--easy-color); }
+.medium-progress { --color: var(--medium-color); }
+.hard-progress { --color: var(--hard-color); }
+
+.stats-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #333;
+    flex: 1 1 45%; /* 2 per row */
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background-color: #3a3a3a;
+}
+
+.card h4 {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Loading Spinner */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--accent-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none; /* Hidden by default */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-msg {
+    color: var(--error-color);
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
